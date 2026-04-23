@@ -58,6 +58,15 @@ Coordinating survey lists, partial follow-ups, suppression list updates.
 ### [9. Platform Access Management](sections/09-access-management/README.md)
 Granting Salesforce, Pardot, Outreach, and Stova access to new users.
 
+### [10. Renewals Support](sections/10-renewals-support/README.md)
+Pulling DAMit attendance, engagement data, and at-risk account summaries for weekly renewals meetings.
+
+### [11. Apollo — Contact Database & Enrichment](sections/11-apollo-database/README.md)
+Finding contacts at member companies, filtering by SF criteria, building LinkedIn audiences, enriching SF records.
+
+### [12. HubSpot Migration (Major Upcoming Project)](sections/12-hubspot-migration/README.md)
+MMA is evaluating Salesforce → HubSpot. Nothing to do yet — but coverage person needs to know this is in flight.
+
 ---
 
 ## Key platforms and login info
@@ -72,6 +81,8 @@ Granting Salesforce, Pardot, Outreach, and Stova access to new users.
 | LinkedIn Campaign Manager | https://www.linkedin.com/campaignmanager | MMA account |
 | Asana | https://app.asana.com | Task tracking |
 | Sharepoint | https://mmaglobalcom.sharepoint.com | File storage |
+| Apollo | https://app.apollo.io | Contact database & enrichment |
+| SurveyMonkey | https://www.surveymonkey.com | Member Satisfaction Survey |
 
 ---
 

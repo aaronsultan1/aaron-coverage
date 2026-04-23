@@ -137,6 +137,40 @@ If you suspect two contacts are the same person:
 
 ---
 
+### 🟡 MEDIUM: Check DAM (Decoding AI for Marketers) certificate status for a contact
+
+Aaron manages certificate tracking in Salesforce. Certificates are now series-based (DAM Certificate 7, 8, 9, etc.).
+
+1. Open the Contact record in SF
+2. Look for the **DAM Certificate** fields in the contact record (scroll down)
+3. At the account level, there is a rollup field showing total certificates across all contacts at that company
+
+---
+
+### 🟡 MEDIUM: Rename or update certificate field names in Salesforce
+
+Aaron was tasked with renaming SF certificate fields from year-based to series-based naming (e.g., "2025 DAM Certificate" → "DAM Certificate Series 7"). This requires SF admin access.
+
+1. Go to **Setup** → **Object Manager** → **Contact**
+2. Click **Fields & Relationships**
+3. Find the certificate field → click **Edit**
+4. Update the **Field Label** (not API name — changing API name would break things)
+5. Save
+
+> Only do this if Aaron has specifically briefed you on which fields need renaming.
+
+---
+
+### 🔴 HARD: DemandTools deduplication
+
+**DemandTools** is a Salesforce data management tool used for large-scale deduplication. It currently only runs on **Shauna's laptop** and requires training before use. Aaron is in the process of getting trained.
+
+- **Do not attempt to use DemandTools without training**
+- For contact duplicates, use Salesforce's built-in merge tool (see above)
+- For large-scale dedup needs (100+ records), flag to Shauna
+
+---
+
 ### 🔴 HARD: Bulk creating contacts from a registration file
 
 Aaron uses Python for this. Do not attempt manually for large batches. See [POSSIBLE Registration → Hard tasks](../01-possible-registration/README.md) for guidance on when to hold vs. act.

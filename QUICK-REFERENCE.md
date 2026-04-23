@@ -17,6 +17,10 @@
 | "Add [webinar] attendees to SF" | [Event/Webinar → Add attendees](sections/06-event-webinar-management/README.md#medium-add-webinar-attendees-to-a-salesforce-campaign-small-batch) |
 | "[Person] bounced in Outreach" | [Outreach → Remove from sequence](sections/03-outreach-sequences/README.md#medium-remove-someone-from-an-outreach-sequence) |
 | "I need Pardot/Outreach/Stova access" | [Access Management](sections/09-access-management/README.md) |
+| "How many DAMit attendees from [company]?" | [Renewals Support → Pull DAMit attendance](sections/10-renewals-support/README.md) |
+| "Find me marketing contacts at member companies" | [Apollo → Find contacts at member companies](sections/11-apollo-database/README.md) |
+| "Can you find [person] in Apollo?" | [Apollo → Search for contacts](sections/11-apollo-database/README.md) |
+| "What's the status of the HubSpot migration?" | [HubSpot Migration — ask Angela Gray](sections/12-hubspot-migration/README.md) |
 
 ---
 
@@ -51,6 +55,12 @@
 - Grant Pardot or Outreach access
 - Build partial-responder list for survey follow-up email
 - Pull GA traffic data for a campaign
+- Search for contacts in Apollo by company or title
+- Build a contact list in Apollo filtered to member companies
+- Check credit usage in Apollo
+- Pull DAMit/event attendance data for a specific company in SF
+- Look up a member's engagement metrics (events attended, certificates earned)
+- Check if a new member is in Apollo
 
 ### 🔴 Hard — hold for Aaron (or escalate to Angela)
 
@@ -89,3 +99,7 @@ These tasks have no manual equivalent for large batches. Put them on hold until 
 - Renewal status propagation
 - Pardot duplicate cleanup
 - Engagement reports (PDF/Word)
+- HubSpot migration work (hold for Aaron / Angela)
+- Apollo bulk enrichment to Salesforce (script-based)
+- Apollo email campaign setup (mailboxes still warming up)
+- DemandTools deduplication runs (only on Shauna's laptop, requires training)
