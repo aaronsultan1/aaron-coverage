@@ -37,6 +37,22 @@ POSSIBLE is MMA's flagship annual conference. Aaron manages the process of:
 
 ---
 
+### 🟢 EASY: Check live registration numbers on the 2026 Events Dashboard
+
+The **2026 Events** dashboard in Salesforce gives a real-time visual breakdown of registration status across POSSIBLE sessions — faster than pulling a report.
+
+![2026 Events Dashboard](../../assets/screenshots/salesforce/09-events-dashboard.png)
+
+1. In Salesforce, click **Dashboards** in the top nav
+2. Search for **2026 Events** and open it
+3. Use the **Event** filter (top left) to narrow to a specific POSSIBLE session (e.g. "contains POSSIBLE 2026")
+4. Use the **Is Board Member** filter to exclude board member registrations if needed
+5. Key tiles: **Registered** (confirmed attendees), **Invited** (still pending), **Total Campaign Members**
+
+> **Note:** Dashboard data is as of the last refresh time shown at top left. Click **Refresh** to get current numbers if it's been more than a few hours.
+
+---
+
 ### 🟢 EASY: Look up whether a registrant's company is an active member
 
 **When this comes up:** Someone asks if Company X is a member.
@@ -92,11 +108,13 @@ Aaron's process:
 4. For people **not** in SF: flag them in a list and hold — do not create contacts without verifying the company is an active SF account
 
 **Manually adding one person to a SF campaign:**
+
+![Add to Marketing Campaign](../../assets/screenshots/salesforce/08-add-to-campaign.png)
+
 1. Open their Contact record in Salesforce
-2. Click the **Campaign History** related list
-3. Click **Add to Campaign**
-4. Search for `POSSIBLE 2026_registration`
-5. Set Status = `Registered`
-6. Save
+2. Click the **Campaign History** related list → click **Add to Campaign**
+3. In the **Choose a Marketing Campaign** modal, search for `POSSIBLE 2026_registration`
+4. Select it → set Status = `Registered`
+5. Save
 
 > **Note:** For batches larger than ~10 people, this is very time-consuming manually. It's okay to hold and wait for Aaron to return if it's not urgent.
