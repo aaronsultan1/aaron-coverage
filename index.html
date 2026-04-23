@@ -404,10 +404,12 @@
 
     r.link = function(href, title, text) {
       const resolved = resolvePath(href, filePath);
-      // If it links to another README inside sections, intercept it
-      const match = resolved.match(/^(sections\/[\w-]+\/README\.md|README\.md|QUICK-REFERENCE\.md|HARD-TASKS-FOR-REVIEW\.md)$/);
-      if (match) {
-        return `<a href="#" data-internal="${resolved}" onclick="navByPath('${resolved}');return false;">${text}</a>`;
+      // Split path from #anchor
+      const [resolvedPath, anchor] = resolved.split('#');
+      const isInternal = /^(sections\/[\w-]+\/README\.md|README\.md|QUICK-REFERENCE\.md|HARD-TASKS-FOR-REVIEW\.md)$/.test(resolvedPath);
+      if (isInternal) {
+        const anchorArg = anchor ? `'${anchor}'` : 'null';
+        return `<a href="#" onclick="navByPath('${resolvedPath}', ${anchorArg});return false;">${text}</a>`;
       }
       return `<a href="${resolved}" target="_blank" rel="noopener">${text}</a>`;
     };
@@ -415,7 +417,7 @@
     return r;
   }
 
-  async function loadContent(path) {
+  async function loadContent(path, anchor) {
     const el = document.getElementById('content');
     el.innerHTML = '<div class="loading">Loading</div>';
     currentPath = path;
@@ -427,24 +429,50 @@
 
       marked.use({ renderer: buildRenderer(path) });
       el.innerHTML = marked.parse(md);
-      document.querySelector('.content-wrap').scrollTop = 0;
+
+      if (anchor) {
+        // Small delay to let DOM paint, then scroll to heading
+        setTimeout(() => {
+          const target = document.getElementById(anchor) ||
+                         document.querySelector(`[id="${anchor}"]`) ||
+                         // GitHub-style: heading text → slug
+                         (() => {
+                           const all = document.querySelectorAll('#content h1,h2,h3,h4');
+                           for (const h of all) {
+                             const slug = h.textContent.trim().toLowerCase()
+                               .replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+                             if (slug === anchor) return h;
+                           }
+                         })();
+          if (target) {
+            document.querySelector('.content-wrap').scrollTop = target.offsetTop - 20;
+          }
+        }, 80);
+      } else {
+        document.querySelector('.content-wrap').scrollTop = 0;
+      }
     } catch(e) {
       el.innerHTML = `<div class="error-msg">Could not load <code>${path}</code>. GitHub Pages may still be deploying, or this section may not exist yet.</div>`;
     }
   }
 
-  function nav(el) {
+  function nav(el, anchor) {
     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
     el.classList.add('active');
     const path = el.dataset.path;
     const title = el.dataset.title;
     document.getElementById('page-title').innerHTML = title;
-    loadContent(path);
+    loadContent(path, anchor);
   }
 
-  function navByPath(path) {
+  function navByPath(path, anchor) {
     const link = document.querySelector(`.nav-link[data-path="${path}"]`);
-    if (link) nav(link);
+    if (link) nav(link, anchor);
+    else {
+      // No matching nav item — load directly and clear active state
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      loadContent(path, anchor);
+    }
   }
 
   // Initial load
