@@ -8,6 +8,8 @@ Aaron is the admin for Salesforce, Pardot, and Outreach. When someone needs acce
 
 ### 🟢 EASY: Grant Salesforce access to a new user
 
+![Salesforce Users Setup Page](../../assets/screenshots/salesforce/07-sf-users-setup.png)
+
 1. In Salesforce, click the **gear icon** (top right) → **Setup**
 2. In the left search bar, type **Users**
 3. Click **Users** → **New User**

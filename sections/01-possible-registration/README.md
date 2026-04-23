@@ -28,6 +28,8 @@ POSSIBLE is MMA's flagship annual conference. Aaron manages the process of:
 
 ### 🟢 EASY: Check how many members are registered (campaign count)
 
+![POSSIBLE 2026 Campaign View](../../assets/screenshots/salesforce/06-possible-campaign.png)
+
 1. Go to **Salesforce** → search for `POSSIBLE 2026_registration` in the search bar
 2. Click on the **Campaign** record
 3. The **Campaign Statistics** section shows total members, responded, etc.

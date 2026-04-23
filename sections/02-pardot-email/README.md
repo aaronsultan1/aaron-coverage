@@ -29,6 +29,8 @@ MMA uses **Pardot** (now called "Marketing Cloud Account Engagement") for market
 
 ### 🟢 EASY: Find an existing Pardot list
 
+![Pardot List Overview](../../assets/screenshots/pardot/01-list-overview.png)
+
 1. Go to **Pardot** (https://pi.pardot.com)
 2. Click **Lists** in the left nav → **Prospect Lists**
 3. Use the search bar to find the list by name

@@ -21,6 +21,8 @@
 
 ### 🟢 EASY: Search for contacts at a specific company
 
+![Apollo People Search](../../assets/screenshots/apollo/01-people-search.png)
+
 1. Go to **Apollo**: https://app.apollo.io
 2. Click **Search** → **People**
 3. In the filters on the left, find **Company** → type the company name

@@ -22,6 +22,8 @@ Salesforce is the central CRM for MMA. Aaron manages data quality, imports, and 
 
 ### 🟢 EASY: Look up a contact in Salesforce
 
+![Search for a Contact](../../assets/screenshots/salesforce/01-search-contact.png)
+
 1. Click the **search bar** at the top of any SF page
 2. Type the person's name or email address
 3. SF will show matching Contacts and Leads
@@ -32,6 +34,8 @@ Salesforce is the central CRM for MMA. Aaron manages data quality, imports, and 
 ---
 
 ### 🟢 EASY: Check if a contact is a protected/board member
+
+![Protected Contact Fields](../../assets/screenshots/salesforce/04-protected-contact.png)
 
 1. Open their Contact record
 2. Look for any of these fields being checked:
@@ -55,6 +59,8 @@ Salesforce is the central CRM for MMA. Aaron manages data quality, imports, and 
 
 ### 🟢 EASY: Check a contact's email fields (there are 4)
 
+![Contact Email Fields & Opt-Out](../../assets/screenshots/salesforce/03-contact-email-fields.png)
+
 SF stores up to 4 emails per contact. When looking for someone by email, check all 4:
 1. **Email** — primary email
 2. **Secondary Email** (`Secondary_Email__c`) — second work email
@@ -64,6 +70,8 @@ SF stores up to 4 emails per contact. When looking for someone by email, check a
 ---
 
 ### 🟢 EASY: Check an account's membership status
+
+![Account Membership Status](../../assets/screenshots/salesforce/02-account-status.png)
 
 1. Search the company name in SF
 2. Open the **Account** record
@@ -124,6 +132,8 @@ If you suspect two contacts are the same person:
 ---
 
 ### 🟡 MEDIUM: Build a Salesforce report
+
+![Salesforce Reports & Export](../../assets/screenshots/salesforce/05-reports-export.png)
 
 1. Go to **Reports** in the top nav
 2. Click **New Report**

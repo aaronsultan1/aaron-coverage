@@ -40,6 +40,8 @@
 
 ### 🟢 EASY: Check a sequence's current status and stats
 
+![Outreach Sequences List](../../assets/screenshots/outreach/01-sequence-list.png)
+
 1. In Outreach, go to **Sequences** in the left nav
 2. Search by name or scroll to find it
 3. Click into the sequence to see:
