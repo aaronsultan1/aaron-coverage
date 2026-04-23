@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aaron Sultan — Coverage Guide</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F3F4F6;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      color: #1F2937;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 272px;
+      min-width: 272px;
+      background: #032D60;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .sidebar-header {
+      padding: 20px 18px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .sidebar-header .logo {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 6px;
+    }
+    .sidebar-header h1 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+    }
+    .sidebar-header .period {
+      margin-top: 5px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 0 20px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.2) transparent;
+    }
+    .sidebar-nav::-webkit-scrollbar { width: 4px; }
+    .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+    .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+
+    .nav-group-label {
+      padding: 14px 18px 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 18px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.72);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: background 0.12s, color 0.12s;
+      user-select: none;
+      text-decoration: none;
+    }
+    .nav-link:hover {
+      background: rgba(255,255,255,0.07);
+      color: #fff;
+    }
+    .nav-link.active {
+      background: rgba(255,255,255,0.11);
+      color: #fff;
+      border-left-color: #4FC3F7;
+      font-weight: 600;
+    }
+    .nav-icon { font-size: 14px; flex-shrink: 0; }
+
+    /* ── Main ── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .topbar {
+      background: #fff;
+      border-bottom: 1px solid #E5E7EB;
+      padding: 0 32px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .topbar-breadcrumb {
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+    .topbar h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #032D60;
+    }
+
+    .content-wrap {
+      flex: 1;
+      overflow-y: auto;
+      padding: 36px 40px 60px;
+    }
+    .content {
+      max-width: 820px;
+    }
+
+    /* ── Markdown styles ── */
+    .content h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #032D60;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .content h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #032D60;
+      margin: 36px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #E5E7EB;
+    }
+    .content h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #111827;
+      margin: 24px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .content p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #374151;
+      margin-bottom: 12px;
+    }
+    .content ul, .content ol {
+      padding-left: 22px;
+      margin-bottom: 14px;
+    }
+    .content li {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #374151;
+      margin-bottom: 2px;
+    }
+    .content li > p { margin-bottom: 4px; }
+    .content strong { color: #111827; font-weight: 600; }
+    .content em { color: #6B7280; }
+    .content a { color: #0170C5; text-decoration: none; font-weight: 500; }
+    .content a:hover { text-decoration: underline; }
+    .content hr { border: none; border-top: 1px solid #E5E7EB; margin: 28px 0; }
+
+    .content blockquote {
+      border-left: 4px solid #FCD34D;
+      background: #FFFBEB;
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .content blockquote p {
+      color: #92400E;
+      margin: 0;
+      font-size: 13px;
+    }
+    .content blockquote strong { color: #78350F; }
+
+    .content code {
+      background: #F3F4F6;
+      border: 1px solid #E5E7EB;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      color: #DC2626;
+    }
+    .content pre {
+      background: #1E293B;
+      color: #E2E8F0;
+      padding: 16px 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    .content pre code {
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
+      font-size: 13px;
+    }
+
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13px;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .content th {
+      background: #F8FAFC;
+      border-bottom: 2px solid #E5E7EB;
+      border-right: 1px solid #E5E7EB;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #6B7280;
+    }
+    .content td {
+      border-bottom: 1px solid #F3F4F6;
+      border-right: 1px solid #F3F4F6;
+      padding: 10px 14px;
+      color: #374151;
+      vertical-align: top;
+    }
+    .content tr:last-child td { border-bottom: none; }
+    .content tr:hover td { background: #F9FAFB; }
+
+    .content img {
+      max-width: 100%;
+      border: 1px solid #E5E7EB;
+      border-radius: 10px;
+      margin: 18px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: block;
+    }
+
+    /* Difficulty pill decoration */
+    .content h3 .pill-easy    { display:inline-block; background:#D1FAE5; color:#065F46; font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; letter-spacing:0.04em; text-transform:uppercase; }
+    .content h3 .pill-medium  { display:inline-block; background:#FEF3C7; color:#92400E; font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; letter-spacing:0.04em; text-transform:uppercase; }
+    .content h3 .pill-hard    { display:inline-block; background:#FEE2E2; color:#991B1B; font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; letter-spacing:0.04em; text-transform:uppercase; }
+
+    /* Loading state */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+      color: #9CA3AF;
+      font-size: 14px;
+      gap: 10px;
+    }
+    .loading::before {
+      content: '';
+      width: 18px; height: 18px;
+      border: 2px solid #E5E7EB;
+      border-top-color: #0170C5;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-msg {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #991B1B;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    /* Warning box for ⚠️ sections */
+    .content h3:has(> span.warn) {
+      color: #92400E;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">MMA Global</div>
+    <h1>Aaron Sultan<br>Coverage Guide</h1>
+    <div class="period">Paternity leave · ~2 weeks</div>
+  </div>
+  <nav class="sidebar-nav">
+
+    <div class="nav-group-label">Overview</div>
+    <div class="nav-link active" data-path="README.md" data-title="Home &amp; Contacts" onclick="nav(this)">
+      <span class="nav-icon">🏠</span> Home &amp; Contacts
+    </div>
+    <div class="nav-link" data-path="QUICK-REFERENCE.md" data-title="Quick Reference" onclick="nav(this)">
+      <span class="nav-icon">⚡</span> Quick Reference
+    </div>
+    <div class="nav-link" data-path="HARD-TASKS-FOR-REVIEW.md" data-title="Hard Tasks — Hold for Aaron" onclick="nav(this)">
+      <span class="nav-icon">⚠️</span> Hard Tasks (Hold)
+    </div>
+
+    <div class="nav-group-label">Sections</div>
+    <div class="nav-link" data-path="sections/01-possible-registration/README.md" data-title="POSSIBLE 2026 Registration" onclick="nav(this)">
+      <span class="nav-icon">📋</span> POSSIBLE Registration
+    </div>
+    <div class="nav-link" data-path="sections/02-pardot-email/README.md" data-title="Pardot / Email" onclick="nav(this)">
+      <span class="nav-icon">📧</span> Pardot / Email
+    </div>
+    <div class="nav-link" data-path="sections/03-outreach-sequences/README.md" data-title="Outreach Sequences" onclick="nav(this)">
+      <span class="nav-icon">📤</span> Outreach Sequences
+    </div>
+    <div class="nav-link" data-path="sections/04-salesforce-data/README.md" data-title="Salesforce Data Management" onclick="nav(this)">
+      <span class="nav-icon">🗃️</span> Salesforce Data
+    </div>
+    <div class="nav-link" data-path="sections/05-analytics-reporting/README.md" data-title="Analytics &amp; Reporting" onclick="nav(this)">
+      <span class="nav-icon">📊</span> Analytics &amp; Reporting
+    </div>
+    <div class="nav-link" data-path="sections/06-event-webinar-management/README.md" data-title="Events &amp; Webinars" onclick="nav(this)">
+      <span class="nav-icon">📅</span> Events &amp; Webinars
+    </div>
+    <div class="nav-link" data-path="sections/07-member-onboarding/README.md" data-title="Member Onboarding" onclick="nav(this)">
+      <span class="nav-icon">🤝</span> Member Onboarding
+    </div>
+    <div class="nav-link" data-path="sections/08-member-satisfaction-survey/README.md" data-title="Member Satisfaction Survey" onclick="nav(this)">
+      <span class="nav-icon">⭐</span> Member Satisfaction
+    </div>
+    <div class="nav-link" data-path="sections/09-access-management/README.md" data-title="Access Management" onclick="nav(this)">
+      <span class="nav-icon">🔑</span> Access Management
+    </div>
+    <div class="nav-link" data-path="sections/10-renewals-support/README.md" data-title="Renewals Support" onclick="nav(this)">
+      <span class="nav-icon">🔄</span> Renewals Support
+    </div>
+    <div class="nav-link" data-path="sections/11-apollo-database/README.md" data-title="Apollo Database" onclick="nav(this)">
+      <span class="nav-icon">🔍</span> Apollo Database
+    </div>
+    <div class="nav-link" data-path="sections/12-hubspot-migration/README.md" data-title="HubSpot Migration" onclick="nav(this)">
+      <span class="nav-icon">🔀</span> HubSpot Migration
+    </div>
+
+  </nav>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+  <div class="topbar">
+    <span class="topbar-breadcrumb">Coverage Guide /</span>
+    <h2 id="page-title">Home &amp; Contacts</h2>
+  </div>
+  <div class="content-wrap">
+    <div class="content" id="content">
+      <div class="loading">Loading</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentPath = 'README.md';
+
+  // Resolve relative image/link paths from a markdown file's directory
+  function resolvePath(relativePath, fromFile) {
+    if (relativePath.startsWith('http') || relativePath.startsWith('//') || relativePath.startsWith('/')) {
+      return relativePath;
+    }
+    const dir = fromFile.split('/').slice(0, -1).join('/');
+    const raw = dir ? dir + '/' + relativePath : relativePath;
+    const parts = raw.split('/');
+    const out = [];
+    for (const p of parts) {
+      if (p === '..') { if (out.length) out.pop(); }
+      else if (p !== '.') out.push(p);
+    }
+    return out.join('/');
+  }
+
+  function buildRenderer(filePath) {
+    const r = new marked.Renderer();
+
+    r.image = function(href, title, text) {
+      const src = resolvePath(href, filePath);
+      return `<img src="${src}" alt="${text || ''}"${title ? ` title="${title}"` : ''} loading="lazy">`;
+    };
+
+    r.link = function(href, title, text) {
+      const resolved = resolvePath(href, filePath);
+      // If it links to another README inside sections, intercept it
+      const match = resolved.match(/^(sections\/[\w-]+\/README\.md|README\.md|QUICK-REFERENCE\.md|HARD-TASKS-FOR-REVIEW\.md)$/);
+      if (match) {
+        return `<a href="#" data-internal="${resolved}" onclick="navByPath('${resolved}');return false;">${text}</a>`;
+      }
+      return `<a href="${resolved}" target="_blank" rel="noopener">${text}</a>`;
+    };
+
+    return r;
+  }
+
+  async function loadContent(path) {
+    const el = document.getElementById('content');
+    el.innerHTML = '<div class="loading">Loading</div>';
+    currentPath = path;
+
+    try {
+      const res = await fetch(path);
+      if (!res.ok) throw new Error(res.status);
+      const md = await res.text();
+
+      marked.use({ renderer: buildRenderer(path) });
+      el.innerHTML = marked.parse(md);
+      document.querySelector('.content-wrap').scrollTop = 0;
+    } catch(e) {
+      el.innerHTML = `<div class="error-msg">Could not load <code>${path}</code>. GitHub Pages may still be deploying, or this section may not exist yet.</div>`;
+    }
+  }
+
+  function nav(el) {
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    el.classList.add('active');
+    const path = el.dataset.path;
+    const title = el.dataset.title;
+    document.getElementById('page-title').innerHTML = title;
+    loadContent(path);
+  }
+
+  function navByPath(path) {
+    const link = document.querySelector(`.nav-link[data-path="${path}"]`);
+    if (link) nav(link);
+  }
+
+  // Initial load
+  loadContent('README.md');
+</script>
+</body>
+</html>
