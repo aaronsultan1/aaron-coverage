@@ -61,6 +61,88 @@
     .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
     .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
 
+    /* ── Search ── */
+    .search-wrap {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 6px;
+      padding: 7px 10px 7px 32px;
+      font-size: 13px;
+      color: #fff;
+      outline: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .search-input::placeholder { color: rgba(255,255,255,0.45); }
+    .search-input:focus {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.4);
+    }
+    .search-icon {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      pointer-events: none;
+    }
+    .search-results {
+      display: none;
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      top: calc(100% - 2px);
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      z-index: 1000;
+      max-height: 360px;
+      overflow-y: auto;
+    }
+    .search-results.open { display: block; }
+    .sr-item {
+      padding: 10px 14px;
+      cursor: pointer;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sr-item:last-child { border-bottom: none; }
+    .sr-item:hover { background: #EBF5FE; }
+    .sr-section {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9CA3AF;
+      margin-bottom: 2px;
+    }
+    .sr-heading {
+      font-size: 13px;
+      font-weight: 600;
+      color: #032D60;
+    }
+    .sr-snippet {
+      font-size: 11px;
+      color: #6B7280;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sr-empty {
+      padding: 14px;
+      font-size: 13px;
+      color: #9CA3AF;
+      text-align: center;
+    }
+    mark { background: #FEF9C3; color: inherit; border-radius: 2px; padding: 0 1px; }
+
     .nav-group-label {
       padding: 14px 18px 4px;
       font-size: 10px;
@@ -308,6 +390,12 @@
     <h1>Aaron Sultan<br>Coverage Guide</h1>
     <div class="period">Paternity leave · ~2 weeks</div>
   </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="search-input" type="text" placeholder="Search guide..." autocomplete="off" spellcheck="false">
+    <div class="search-results" id="search-results"></div>
+  </div>
+
   <nav class="sidebar-nav">
 
     <div class="nav-group-label">Overview</div>
@@ -474,6 +562,122 @@
       loadContent(path, anchor);
     }
   }
+
+  // ═══ SEARCH ═══════════════════════════════════════════════════════════════════
+
+  // All indexable files: {path, sectionLabel}
+  const ALL_FILES = [
+    { path: 'README.md',                                          label: 'Home & Contacts' },
+    { path: 'QUICK-REFERENCE.md',                                 label: 'Quick Reference' },
+    { path: 'HARD-TASKS-FOR-REVIEW.md',                           label: 'Hard Tasks' },
+    { path: 'sections/01-possible-registration/README.md',        label: 'POSSIBLE Registration' },
+    { path: 'sections/02-pardot-email/README.md',                 label: 'Pardot / Email' },
+    { path: 'sections/03-outreach-sequences/README.md',           label: 'Outreach Sequences' },
+    { path: 'sections/04-salesforce-data/README.md',              label: 'Salesforce Data' },
+    { path: 'sections/05-analytics-reporting/README.md',          label: 'Analytics & Reporting' },
+    { path: 'sections/06-event-webinar-management/README.md',     label: 'Events & Webinars' },
+    { path: 'sections/07-member-onboarding/README.md',            label: 'Member Onboarding' },
+    { path: 'sections/08-member-satisfaction-survey/README.md',   label: 'Member Satisfaction' },
+    { path: 'sections/09-access-management/README.md',            label: 'Access Management' },
+    { path: 'sections/10-renewals-support/README.md',             label: 'Renewals Support' },
+    { path: 'sections/11-apollo-database/README.md',              label: 'Apollo Database' },
+    { path: 'sections/12-hubspot-migration/README.md',            label: 'HubSpot Migration' },
+  ];
+
+  // Search index: [{path, label, heading, headingSlug, snippet, level}]
+  let searchIndex = [];
+  let indexBuilt  = false;
+
+  async function buildSearchIndex() {
+    if (indexBuilt) return;
+    const results = await Promise.allSettled(ALL_FILES.map(f => fetch(f.path).then(r => r.ok ? r.text() : '')));
+    results.forEach((r, i) => {
+      if (r.status !== 'fulfilled' || !r.value) return;
+      const { path, label } = ALL_FILES[i];
+      const lines = r.value.split('\n');
+      let lastHeading = '', lastSlug = '', buffer = [];
+
+      const flush = () => {
+        if (lastHeading) {
+          searchIndex.push({
+            path, label, heading: lastHeading, slug: lastSlug,
+            snippet: buffer.filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('!')).slice(0,2).join(' ').replace(/[*_`[\]()]/g,'').substring(0,120)
+          });
+        }
+        buffer = [];
+      };
+
+      for (const line of lines) {
+        const hm = line.match(/^(#{1,3})\s+(.+)/);
+        if (hm) {
+          flush();
+          lastHeading = hm[2].replace(/[*_`]/g,'').trim();
+          lastSlug = lastHeading.toLowerCase().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-');
+          buffer = [];
+        } else {
+          buffer.push(line);
+        }
+      }
+      flush();
+    });
+    indexBuilt = true;
+  }
+
+  function highlight(text, query) {
+    const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+    return text.replace(re, '<mark>$1</mark>');
+  }
+
+  function runSearch(query) {
+    const q = query.trim().toLowerCase();
+    const box = document.getElementById('search-results');
+    if (q.length < 2) { box.classList.remove('open'); return; }
+
+    const matches = searchIndex.filter(item =>
+      item.heading.toLowerCase().includes(q) ||
+      item.snippet.toLowerCase().includes(q) ||
+      item.label.toLowerCase().includes(q)
+    ).slice(0, 20);
+
+    if (matches.length === 0) {
+      box.innerHTML = `<div class="sr-empty">No results for "<strong>${query}</strong>"</div>`;
+    } else {
+      box.innerHTML = matches.map(m => `
+        <div class="sr-item" data-path="${m.path}" data-slug="${m.slug}">
+          <div class="sr-section">${m.label}</div>
+          <div class="sr-heading">${highlight(m.heading, query)}</div>
+          ${m.snippet ? `<div class="sr-snippet">${highlight(m.snippet, query)}</div>` : ''}
+        </div>`).join('');
+      box.querySelectorAll('.sr-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const path = el.dataset.path;
+          const slug = el.dataset.slug;
+          const link = document.querySelector(`.nav-link[data-path="${path}"]`);
+          if (link) nav(link, slug); else navByPath(path, slug);
+          box.classList.remove('open');
+          document.getElementById('search-input').value = '';
+        });
+      });
+    }
+    box.classList.add('open');
+  }
+
+  // Wire up search input
+  const searchInput = document.getElementById('search-input');
+  searchInput.addEventListener('focus', () => { buildSearchIndex(); });
+  searchInput.addEventListener('input', e => runSearch(e.target.value));
+  searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.getElementById('search-results').classList.remove('open');
+      searchInput.blur();
+    }
+  });
+  // Close on outside click
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.search-wrap')) {
+      document.getElementById('search-results').classList.remove('open');
+    }
+  });
 
   // Initial load
   loadContent('README.md');
