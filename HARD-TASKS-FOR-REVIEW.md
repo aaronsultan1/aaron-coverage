@@ -13,16 +13,7 @@ These tasks require Python scripts or deep system knowledge and are **not feasib
 
 ---
 
-## 2. Rasa AI Newsletter Engagement Sync
-
-**Frequency:** Nightly (runs automatically via cron job)  
-**What it does:** Syncs open/click data from the Rasa custom object to Contact-level SF fields  
-**Script:** `sync_rasa_ai_newsletter.py`  
-**Confirm the cron job is active before leaving. If it stops, ask IT — not customer-facing so low urgency.**
-
----
-
-## 3. Outreach Sequence Bulk Enrollment
+## 2. Outreach Sequence Bulk Enrollment
 
 **Frequency:** At the start of each campaign wave (e.g., CCS invites, POSSIBLE session comms)  
 **What it does:** Takes a list of contacts from SF and bulk-enrolls them into an Outreach sequence  
@@ -31,7 +22,7 @@ These tasks require Python scripts or deep system knowledge and are **not feasib
 
 ---
 
-## 4. Kargo Campaign Report
+## 3. Kargo Campaign Report
 
 **Frequency:** Ad hoc (when Kargo sends raw impression/delivery data)  
 **What it does:** Processes Kargo raw data files → produces formatted Excel report with campaign performance metrics  
@@ -40,7 +31,7 @@ These tasks require Python scripts or deep system knowledge and are **not feasib
 
 ---
 
-## 5. CCS Invitation Cleanup / Reporting
+## 4. CCS Invitation Cleanup / Reporting
 
 **Frequency:** Periodic, ahead of CCS (CMO & CEO Summit)  
 **What it does:** Pulls data on which member companies have been invited, who has RSVP'd, which members haven't been touched  
@@ -49,7 +40,7 @@ These tasks require Python scripts or deep system knowledge and are **not feasib
 
 ---
 
-## 6. Pardot Duplicate Cleanup
+## 5. Pardot Duplicate Cleanup
 
 **Frequency:** Periodic  
 **What it does:** Identifies and resolves duplicate Prospect records in Pardot  
