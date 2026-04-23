@@ -36,6 +36,8 @@ Aaron pulls data from multiple analytics platforms to answer questions about cam
 
 **When this comes up:** Amanda or Dan asks for LinkedIn ad stats.
 
+![LinkedIn Campaign Manager Analytics](../../assets/screenshots/apollo/02-linkedin-campaigns.png)
+
 1. Go to **LinkedIn Campaign Manager**: https://www.linkedin.com/campaignmanager
 2. Select the **MMA** account
 3. Click **Analyze** → **Reporting**

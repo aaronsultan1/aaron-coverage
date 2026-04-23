@@ -66,6 +66,8 @@
 
 **When this comes up:** Andrew Somer asks to add a specific CMO to the CCS/CATS sequence.
 
+![Add Prospect to Outreach Sequence](../../assets/screenshots/outreach/02-add-to-sequence.png)
+
 1. In Outreach, find the sequence you want to add them to
 2. Click **Add Prospects** (or **Enroll**)
 3. Search for the person by name or email
