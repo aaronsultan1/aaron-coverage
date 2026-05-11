@@ -13,7 +13,7 @@ Salesforce is MMA's CRM. This section covers the most common lookups and data pu
 - **Contact** = a person at that company
 - **Campaign** = a list of contacts associated with an event, email, or program (e.g., "CATS May 2026 - Registrants")
 - **Account Status values:** `Active-Parent`, `Active-Subsidiary`, `Active-Local Council` = current member; `Inactive`, `Cancelled`, `Non-Member` = not a member
-- **Protected contacts** = board members, B2B CMO Council, MFC — never edit their contact records; only Jade/Angela touch these
+- **Protected contacts** = board members, B2B CMO Council, MFC — never edit their contact records; only Jade, Angela, and Shauna touch these
 
 ---
 
