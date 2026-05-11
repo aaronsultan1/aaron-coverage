@@ -32,7 +32,7 @@ Salesforce is MMA's CRM. This section covers the most common lookups and data pu
 
 ---
 
-### 🟢 EASY: Check if a contact is a board member / protected
+### 🟢 EASY: Check if a contact is a board member
 
 ![Protected Contact Fields](../../assets/screenshots/salesforce/04-protected-contact.png)
 
