@@ -405,46 +405,16 @@
     <div class="nav-link" data-path="QUICK-REFERENCE.md" data-title="Quick Reference" onclick="nav(this)">
       <span class="nav-icon">⚡</span> Quick Reference
     </div>
-    <div class="nav-link" data-path="HARD-TASKS-FOR-REVIEW.md" data-title="Hard Tasks — Hold for Aaron" onclick="nav(this)">
-      <span class="nav-icon">⚠️</span> Hard Tasks (Hold)
-    </div>
 
     <div class="nav-group-label">Sections</div>
-    <div class="nav-link" data-path="sections/01-possible-registration/README.md" data-title="POSSIBLE 2026 Registration" onclick="nav(this)">
-      <span class="nav-icon">📋</span> POSSIBLE Registration
+    <div class="nav-link" data-path="sections/04-salesforce-data/README.md" data-title="Salesforce — Find &amp; Pull Data" onclick="nav(this)">
+      <span class="nav-icon">🗃️</span> Salesforce — Find &amp; Pull Data
     </div>
-    <div class="nav-link" data-path="sections/02-pardot-email/README.md" data-title="Pardot / Email" onclick="nav(this)">
-      <span class="nav-icon">📧</span> Pardot / Email
+    <div class="nav-link" data-path="sections/03-outreach-sequences/README.md" data-title="Outreach — Sequences" onclick="nav(this)">
+      <span class="nav-icon">📤</span> Outreach — Sequences
     </div>
-    <div class="nav-link" data-path="sections/03-outreach-sequences/README.md" data-title="Outreach Sequences" onclick="nav(this)">
-      <span class="nav-icon">📤</span> Outreach Sequences
-    </div>
-    <div class="nav-link" data-path="sections/04-salesforce-data/README.md" data-title="Salesforce Data Management" onclick="nav(this)">
-      <span class="nav-icon">🗃️</span> Salesforce Data
-    </div>
-    <div class="nav-link" data-path="sections/05-analytics-reporting/README.md" data-title="Analytics &amp; Reporting" onclick="nav(this)">
-      <span class="nav-icon">📊</span> Analytics &amp; Reporting
-    </div>
-    <div class="nav-link" data-path="sections/06-event-webinar-management/README.md" data-title="Events &amp; Webinars" onclick="nav(this)">
-      <span class="nav-icon">📅</span> Events &amp; Webinars
-    </div>
-    <div class="nav-link" data-path="sections/07-member-onboarding/README.md" data-title="Member Onboarding" onclick="nav(this)">
-      <span class="nav-icon">🤝</span> Member Onboarding
-    </div>
-    <div class="nav-link" data-path="sections/08-member-satisfaction-survey/README.md" data-title="Member Satisfaction Survey" onclick="nav(this)">
-      <span class="nav-icon">⭐</span> Member Satisfaction
-    </div>
-    <div class="nav-link" data-path="sections/09-access-management/README.md" data-title="Access Management" onclick="nav(this)">
-      <span class="nav-icon">🔑</span> Access Management
-    </div>
-    <div class="nav-link" data-path="sections/10-renewals-support/README.md" data-title="Renewals Support" onclick="nav(this)">
-      <span class="nav-icon">🔄</span> Renewals Support
-    </div>
-    <div class="nav-link" data-path="sections/11-apollo-database/README.md" data-title="Apollo Database" onclick="nav(this)">
-      <span class="nav-icon">🔍</span> Apollo Database
-    </div>
-    <div class="nav-link" data-path="sections/12-hubspot-migration/README.md" data-title="HubSpot Migration" onclick="nav(this)">
-      <span class="nav-icon">🔀</span> HubSpot Migration
+    <div class="nav-link" data-path="sections/02-pardot-email/README.md" data-title="Pardot — List Management" onclick="nav(this)">
+      <span class="nav-icon">📧</span> Pardot — List Management
     </div>
 
   </nav>
@@ -567,21 +537,11 @@
 
   // All indexable files: {path, sectionLabel}
   const ALL_FILES = [
-    { path: 'README.md',                                          label: 'Home & Contacts' },
-    { path: 'QUICK-REFERENCE.md',                                 label: 'Quick Reference' },
-    { path: 'HARD-TASKS-FOR-REVIEW.md',                           label: 'Hard Tasks' },
-    { path: 'sections/01-possible-registration/README.md',        label: 'POSSIBLE Registration' },
-    { path: 'sections/02-pardot-email/README.md',                 label: 'Pardot / Email' },
-    { path: 'sections/03-outreach-sequences/README.md',           label: 'Outreach Sequences' },
-    { path: 'sections/04-salesforce-data/README.md',              label: 'Salesforce Data' },
-    { path: 'sections/05-analytics-reporting/README.md',          label: 'Analytics & Reporting' },
-    { path: 'sections/06-event-webinar-management/README.md',     label: 'Events & Webinars' },
-    { path: 'sections/07-member-onboarding/README.md',            label: 'Member Onboarding' },
-    { path: 'sections/08-member-satisfaction-survey/README.md',   label: 'Member Satisfaction' },
-    { path: 'sections/09-access-management/README.md',            label: 'Access Management' },
-    { path: 'sections/10-renewals-support/README.md',             label: 'Renewals Support' },
-    { path: 'sections/11-apollo-database/README.md',              label: 'Apollo Database' },
-    { path: 'sections/12-hubspot-migration/README.md',            label: 'HubSpot Migration' },
+    { path: 'README.md',                                  label: 'Home & Contacts' },
+    { path: 'QUICK-REFERENCE.md',                         label: 'Quick Reference' },
+    { path: 'sections/04-salesforce-data/README.md',      label: 'Salesforce — Find & Pull Data' },
+    { path: 'sections/03-outreach-sequences/README.md',   label: 'Outreach — Sequences' },
+    { path: 'sections/02-pardot-email/README.md',         label: 'Pardot — List Management' },
   ];
 
   // Search index: [{path, label, heading, headingSlug, snippet, level}]
