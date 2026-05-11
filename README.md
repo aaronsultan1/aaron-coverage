@@ -6,20 +6,6 @@ This guide is for doing things directly in Salesforce, Pardot, and Outreach. Ste
 
 ---
 
-## Who to contact for what
-
-| Person | Role | When to ping |
-|---|---|---|
-| **Angela Gray** | VP, Membership & Marketing | Strategic decisions, board contacts, anything urgent |
-| **Shauna Peck** | Membership Manager | Account status questions, new member paperwork |
-| **Amanda Hyland** | Marketing Coordinator | Pardot email sends, Outreach sequences |
-| **Jason Chase (Reach)** | Email vendor | He schedules and fires all Pardot emails — give him the list name and he handles the rest |
-| **Erin Disney** | Membership Coordinator | SF data questions, event attendee tracking |
-| **Andrew Somer** | Sales | CCS/CATS/CARS CMO invite requests |
-| **Dan Whiting** | Content/Events | Webinar attendee tracking, DAMit |
-| **Jade** | Operations | Board member records — do not touch board contacts without Jade |
-
----
 
 ## Three sections — pick what you need
 
