@@ -41,9 +41,11 @@ This is the end-to-end process for building a new audience and getting emails ou
 
 ### Step 2 — Import into Outreach
 
-1. Log into Outreach → click **Prospects** in the top nav
-2. Click the **Import** button (top right of the Prospects page)
-3. Select **Import from CSV** → upload the file from your desktop
+![Select Prospects as the import type](../../assets/screenshots/outreach/04-import-type-prospects.png)
+
+1. Log into Outreach → click your **profile icon** (bottom left) → **System activity** → **Imports**
+2. Click **New Import** → select **Prospects — CSV file from computer** *(see screenshot above)*
+3. Upload the file from your desktop → click **Next**
 4. On the **Map Fields** screen, match each column:
 
 | CSV column | → | Outreach field |
@@ -93,28 +95,37 @@ This is the end-to-end process for building a new audience and getting emails ou
 
 **1.** Export your list from Salesforce as a CSV (First Name, Last Name, Email minimum).
 
-**2.** In Outreach, click your **profile icon** (bottom left) → **System activity** → **Imports**
+![Where to find Imports in the Outreach nav](../../assets/screenshots/outreach/03-system-activity-imports.png)
 
-**3.** Click **New Import** → select type **Prospects** → upload your CSV
+**2.** In Outreach, click your **profile icon** (bottom left) → **System activity** → **Imports** *(see screenshot above)*
+
+![Select Prospects as the import type](../../assets/screenshots/outreach/04-import-type-prospects.png)
+
+**3.** Click **New Import** → select **Prospects — CSV file from computer** → upload your CSV
 
 **4.** Work through the **Map Fields** step as usual: First Name, Last Name, Email, Title, Account Name
 
-**5.** On the next screen you'll see optional fields: Owner, Stage, Time zone, Source, Tags
-   - **Leave Owner blank**
-   - **Leave Time zone blank**
-   - You can add a **Tag** (e.g., "CATS May batch") to label this group for easy reference
+![Finalize your import — leave all fields blank](../../assets/screenshots/outreach/05-finalize-import.png)
 
-**6.** At the bottom of that screen → **"What would you like to do with duplicates?"**
+**5.** On the "Finalize your import" screen: Owner, Stage, Time zone, Source, Tags
+   - **Leave every field blank** — do not assign an Owner, do not set a Time zone
+   - You can optionally add a **Tag** (e.g., "CATS May batch") to label this group
 
-   → **Select "Skip and keep existing fields"**
+**6.** Scroll down on that same screen → **"What would you like to do with duplicates?"**
 
-   > This is the critical setting. It tells Outreach not to update anything on existing records — so the import is read-only. It just matches people without touching their data.
+![Select "Skip and keep existing fields"](../../assets/screenshots/outreach/06-skip-duplicates.png)
+
+   → Select **"Skip and keep existing fields"** *(see screenshot above)*
+
+   > **This is the whole trick.** Outreach still processes the import and matches every person in your CSV to existing records — but because you chose "Skip," it makes zero changes to anyone's data. The magic is that every import creates a filter in Outreach. You're not really importing to update anything — you're importing to get that filter, so you can click the count and see exactly those people in the Prospects view.
+
+![Import complete — the count is a clickable filter link](../../assets/screenshots/outreach/07-import-complete.png)
 
 **7.** Click **Import**. When it finishes, a popup shows **Successes** and **Total** → click **Done**
 
-**8.** You're back on the Imports list. Find your import — the number (e.g., **47 of 47**) is a **clickable link**
+**8.** Back on the Imports list, find your completed import. The count (e.g., **22 of 22**) is a **clickable link** *(see screenshot above)*
 
-**9.** Click that number → Outreach filters the Prospects page to show exactly those people
+**9.** Click that number → Outreach opens the Prospects page filtered to exactly those people
 
 **10.** Check all the boxes → select all → click **Add to Sequence** → choose the sequence → confirm
 
