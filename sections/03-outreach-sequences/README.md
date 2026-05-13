@@ -127,6 +127,10 @@ This is the end-to-end process for building a new audience and getting emails ou
 
 **9.** Click that number → Outreach opens the Prospects page filtered to exactly those people
 
+![Filtered prospects view — only your import batch](../../assets/screenshots/outreach/08-filtered-prospects.png)
+
+The **"For batch is XXXXX"** filter chip appears automatically. You can see the total count matches your import. This is your working audience.
+
 **10.** Check all the boxes → select all → click **Add to Sequence** → choose the sequence → confirm
 
 ---
