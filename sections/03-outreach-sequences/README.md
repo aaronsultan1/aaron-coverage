@@ -25,127 +25,147 @@
 
 ## The full workflow: Salesforce → Outreach
 
-This is the end-to-end process for building a new audience and getting a sequence out.
-
-### Step 1 — Build the list in Salesforce
-
-1. Go to Salesforce → **Reports** (or find an existing list view under **Contacts** or **Campaigns**)
-2. Build or run a report with the right audience filters (see [Salesforce — Find & Pull Data](../04-salesforce-data/README.md#build-a-report-or-run-a-list-view))
-3. Make sure the report includes at minimum: **First Name**, **Last Name**, **Email**, **Title**, **Company/Account Name**
-4. Click **Export** → choose **CSV** (Details Only, not formatted)
-5. Save the file to your desktop
-
-### Step 2 — Import into Outreach
-
-1. In Outreach, click the **grid/apps icon** (top left) or go to **Prospects** in the left nav
-2. Look for an **Import** button (usually top right of the Prospects view) → click it
-3. Upload the CSV you exported from Salesforce
-4. On the **field mapping** screen, map each column to the right Outreach field:
-   - First Name → First Name
-   - Last Name → Last Name
-   - Email → Email *(required)*
-   - Title → Title
-   - Company → Account Name
-5. Click **Import** to finish
-
-> After import, Outreach shows you a summary: how many prospects were **created** (new) vs. **updated** (already existed). New people are added to Outreach; existing people's records are updated with any new field values you mapped.
-
-### Step 3 — Add prospects to a sequence
-
-1. In Outreach, go to **Sequences** and find the sequence you want to use
-2. Click **Add Prospects** (or **Enroll**)
-3. Search for the people by name or import them from the list you just created
-4. Confirm enrollment — they'll start receiving emails according to the sequence schedule
-
-### Step 4 — Activate the sequence (if it's not already active)
-
-1. Open the sequence
-2. If it shows **Paused**, click **Activate** (top right)
-3. **Check with Amanda before activating** — she may want to review the prospect list or timing first
+This is the end-to-end process for building a new audience and getting emails out.
 
 ---
 
-## The "fake import" trick — isolating people already in Outreach
+### Step 1 — Export the list from Salesforce
 
-**When to use this:** You have a Salesforce export and want to target only the people from that list who are *already* in Outreach — so you can add them to a sequence or work with them as a group — without changing any of their existing data.
+1. Go to Salesforce → **Reports** (left nav or top nav)
+2. Find and run a report with the right audience (see [Salesforce — Find & Pull Data](../04-salesforce-data/README.md))
+3. Make sure the report includes at minimum: **First Name**, **Last Name**, **Email**, **Title**, **Account Name**
+4. Click **Export** at the top right → choose **Details Only** → **CSV**
+5. Save the file to your desktop
 
-**Why it works:** Every import in Outreach gets an ID. After the import completes, Outreach shows you the count of people it matched. That number is clickable — clicking it filters the entire Prospects page to show exactly those people. That filtered view is your working audience.
+---
+
+### Step 2 — Import into Outreach
+
+1. Log into Outreach → click **Prospects** in the top nav
+2. Click the **Import** button (top right of the Prospects page)
+3. Select **Import from CSV** → upload the file from your desktop
+4. On the **Map Fields** screen, match each column:
+
+| CSV column | → | Outreach field |
+|---|---|---|
+| First Name | → | First Name |
+| Last Name | → | Last Name |
+| Email | → | Email *(required)* |
+| Title | → | Title |
+| Account Name | → | Account Name |
+
+5. Click **Next** → then **Import**
+
+> After import, Outreach shows a summary: **created** (brand new records) vs. **updated** (people already in Outreach). Both counts are normal.
+
+---
+
+### Step 3 — Add the imported prospects to a sequence
+
+![Sequences list — find and open a sequence](../../assets/screenshots/outreach/01-sequence-list.png)
+
+1. In Outreach, click **Sequences** in the top nav
+2. Search for the sequence by name (e.g., "CATS May 2026")
+3. Click into the sequence → click **Add Prospects** (top right)
+4. Search for the people by name, or use the import batch filter (see Fake Import trick below)
+5. Select everyone → click **Add to Sequence**
+6. **Check with Amanda or Angela before activating** — they'll confirm the timing and list
+
+---
+
+### Step 4 — Activate (if the sequence is paused)
+
+1. Inside the sequence, look at the top right
+2. If it says **Paused** → click **Activate**
+3. Always confirm with Amanda first — she manages send timing
+
+---
+
+## The "fake import" trick — target people already in Outreach
+
+**When to use this:** You have a Salesforce export and you want to add those people to a sequence — but you don't want to overwrite any of their existing Outreach data, and you only want to work with the ones who are *already in Outreach*.
+
+**How it works:** You import the CSV with a special setting that skips all updates. Outreach still processes the file and matches the records. It then shows you a **clickable count** of how many matched — clicking it filters the Prospects view to exactly those people. From there you can add them all to a sequence at once.
+
+---
 
 **Step-by-step:**
 
-**1.** Export your list from Salesforce as a CSV. Needs at minimum: First Name, Last Name, Email.
+**1.** Export your list from Salesforce as a CSV (First Name, Last Name, Email minimum).
 
-**2.** In Outreach, go to the left sidebar → **System activity** → **Imports**
+**2.** In Outreach, click your **profile icon** (bottom left) → **System activity** → **Imports**
 
-**3.** Click the button to start a new import. Select type: **Prospects**, upload your CSV.
+**3.** Click **New Import** → select type **Prospects** → upload your CSV
 
-**4.** Work through the **Map fields** step: map First Name, Last Name, Email, Title, Company Name as usual.
+**4.** Work through the **Map Fields** step as usual: First Name, Last Name, Email, Title, Account Name
 
-**5.** On the next screen (the overrides screen), you'll see fields for Owner, Stage, Time zone, Source, Tags:
+**5.** On the next screen you'll see optional fields: Owner, Stage, Time zone, Source, Tags
    - **Leave Owner blank**
-   - **Leave Time zone blank** — Outreach tries to default this, leave it empty
-   - Leave Stage and Source blank
-   - You can optionally add a **Tag** here to label this batch for easy reference later
+   - **Leave Time zone blank**
+   - You can add a **Tag** (e.g., "CATS May batch") to label this group for easy reference
 
-**6.** At the bottom of that screen: **"What would you like to do with duplicates?"**
-   → Select **"Skip and keep existing fields"**
+**6.** At the bottom of that screen → **"What would you like to do with duplicates?"**
 
-   This is the key setting. It tells Outreach not to overwrite anything on records that already exist — so the import touches nothing, it just matches.
+   → **Select "Skip and keep existing fields"**
 
-**7.** Complete the import. When it finishes, a popup shows **Successes** and **Total** counts → click **Done**.
+   > This is the critical setting. It tells Outreach not to update anything on existing records — so the import is read-only. It just matches people without touching their data.
 
-**8.** Back on the Imports list, find your completed import. The count (e.g., **22 of 22**) is a **clickable link**.
+**7.** Click **Import**. When it finishes, a popup shows **Successes** and **Total** → click **Done**
 
-**9.** Click that number → Outreach opens the **Prospects** page filtered to only those people. The filter bar shows something like `For batch is [ID]`. This is your isolated audience.
+**8.** You're back on the Imports list. Find your import — the number (e.g., **47 of 47**) is a **clickable link**
 
-**10.** From here: check the checkboxes → select all → add to a sequence, apply a tag, or do whatever you need with that group.
+**9.** Click that number → Outreach filters the Prospects page to show exactly those people
+
+**10.** Check all the boxes → select all → click **Add to Sequence** → choose the sequence → confirm
 
 ---
 
 ## Tasks
 
-### 🟢 EASY: Check if a specific person is in a sequence
+### 🟢 EASY: Check a sequence's status and stats
 
-1. Go to Outreach → **Prospects** in the left nav
-2. Search by name or email
-3. Click their record → scroll to the **Sequences** tab
-4. You'll see which sequences they're in and their status (Active, Paused, Finished, Bounced, etc.)
+![Sequences list view](../../assets/screenshots/outreach/01-sequence-list.png)
+
+1. In Outreach, click **Sequences** in the top nav
+2. You'll see all sequences with their **Status** (Active / Paused / Draft), owner, and prospect count
+3. Click into any sequence to see open rates, reply rates, and bounce rates
 
 ---
 
-### 🟢 EASY: Check a sequence's status and stats
+### 🟢 EASY: Check if a specific person is in a sequence
 
-1. In Outreach, go to **Sequences** in the left nav
-2. Search by name or scroll to find it
-3. Click into the sequence to see:
-   - How many people are enrolled
-   - Open/reply/bounce rates
-   - Whether it's currently Active or Paused
+1. Go to Outreach → **Prospects** in the top nav
+2. Search by name or email in the search bar
+3. Click their record → scroll to the **Sequences** tab
+4. You'll see every sequence they're in and their current status (Active, Finished, Bounced, etc.)
 
 ---
 
 ### 🟢 EASY: Pause a sequence (emergency stop)
 
-1. In Outreach → **Sequences** → find the sequence
-2. Click **Pause** (top right of the sequence view)
-3. Confirm — all scheduled emails stop immediately until someone resumes it
+1. In Outreach → **Sequences** → click into the sequence
+2. Click **Pause** (top right)
+3. Confirm — all scheduled emails stop immediately
 
-> **When to do this:** Typo in an email, a board member got in accidentally, or Amanda/Angela asks you to stop.
+> **When to do this:** There's a typo in an email, a board member got enrolled by mistake, or Amanda/Angela asks you to stop.
 
 ---
 
 ### 🟡 MEDIUM: Add one person to an existing sequence
 
-1. In Outreach, go to the sequence you want to add them to
-2. Click **Add Prospects** (or **Enroll**)
-3. Search for the person by name or email
-4. If they exist in Outreach: select them, confirm enrollment
-5. If they don't exist yet, create them first:
-   - Go to **Prospects** → **+ New Prospect**
-   - Fill in: First Name, Last Name, Email, Title, Company
-   - Save — then go back to the sequence and enroll them
+![Adding a prospect to a sequence](../../assets/screenshots/outreach/02-add-to-sequence.png)
 
-> Before adding anyone, search their email first to confirm they're not already in the sequence.
+1. In Outreach, find the person under **Prospects** → open their record
+2. Click **+ Add to Sequence** (top right of their record)
+3. Search for the sequence by name
+4. Select it (radio button turns purple) → click **Add to Sequence**
+
+> Always confirm with Amanda or Angela which sequence to use before adding someone.
+
+If the person doesn't exist in Outreach yet:
+- Go to **Prospects** → **+ New Prospect** (top right)
+- Fill in: First Name, Last Name, Email, Title, Company
+- Save — then follow the steps above
 
 ---
 
