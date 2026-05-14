@@ -52,7 +52,7 @@ Salesforce is MMA's CRM. This section covers the most common lookups and data pu
 2. Look for **Email Opt Out** — if checked, they've opted out of marketing emails
 3. Also check **Pardot Do Not Email** — an older field that means the same thing
 
-> Opted-out people may still be reachable through Reach Marketing's sending domain — ask Amanda if this comes up.
+> If you need to reach someone who has opted out, ask Amanda — she'll know the right approach.
 
 ---
 

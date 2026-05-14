@@ -3,7 +3,7 @@
 MMA runs an annual Member Satisfaction Survey through **SurveyMonkey**. Aaron helps Kayte Hamilton build the Pardot lists used to send the survey and follow-up emails.
 
 **Key person:** Kayte Hamilton — she owns the survey, content, and timing  
-**Email sends:** Jason Chase (Reach Marketing) sends the actual emails from Pardot
+**Email sends:** Jason Chase sends the actual emails from Pardot
 
 ---
 
@@ -16,7 +16,7 @@ The survey goes to multiple audiences, typically split into 3 lists:
 
 Each list is sent a version of the survey email on a specific day. Kayte manages the timing and which list goes out first.
 
-There is also a regional split: some contacts go through **MMA (Pardot)**, others go through **Reach Marketing** (because they're unmailable in Pardot).
+There is also a regional split — Kayte will specify which contacts go to which list.
 
 ---
 

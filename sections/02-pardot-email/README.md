@@ -1,12 +1,12 @@
 # Pardot — List Management
 
-MMA uses **Pardot** (also called "Marketing Cloud Account Engagement") for marketing emails. **Aaron's primary job in Pardot is building the lists.** The actual email sending is handled by **Jason Chase at Reach Marketing**.
+MMA uses **Pardot** (also called "Marketing Cloud Account Engagement") for marketing emails. **Aaron's primary job in Pardot is building the lists.** The actual email sending is handled by **Jason Chase**.
 
 **Pardot URL:** https://pi.pardot.com
 **Login:** Same as Salesforce (single sign-on via your MMA email)
 
 **Key people:**
-- **Jason Chase (Reach Marketing)** — schedules and sends all Pardot emails; he needs a list name from Aaron
+- **Jason Chase** — schedules and sends all Pardot emails; he needs a list name from Aaron
 - **Amanda Hyland** — drives what emails go out and when; she'll tell you what audience is needed
 
 ---
@@ -69,7 +69,7 @@ Every Pardot prospect has a mailable status. This affects whether Pardot will se
    - **Hard bounce** — their email address permanently bounced
    - **Admin do not email** — manually flagged
 
-> **Important:** Unmailable in Pardot does NOT always mean they can never be contacted. Reach Marketing can email unmailable people through their own sending domain as a workaround. If this comes up, ask Amanda — she knows when to use the Reach workaround.
+> **Important:** If you're unsure about someone's mailable status and whether they can still be reached, ask Amanda — she'll know.
 
 ---
 
@@ -158,7 +158,7 @@ After an email goes out, you may get asked how many people were on the list or w
 
 1. In Pardot → **Lists** → find the list
 2. The list overview shows the **prospect count** at the time of the last update
-3. For open/click/bounce stats, ask **Jason Chase** — he has the send report on the Reach Marketing side
+3. For open/click/bounce stats, ask **Jason Chase** — he has the send report
 
 ---
 
