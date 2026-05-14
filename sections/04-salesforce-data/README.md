@@ -150,6 +150,134 @@ Campaigns in Salesforce track who was invited, registered, or attended an event 
 
 ---
 
+---
+
+## How Aaron pulls large audience reports
+
+This section explains the logic behind building large contact lists for event invitations, Outreach sequences, and member outreach — and answers questions like "what filters do you use?" and "do you include subsidiaries?"
+
+---
+
+### Region scope — always NA + Global
+
+Every large audience pull includes **both** `Region = NA` and `Region = Global`. Global accounts are multi-region members and are always included alongside North America. There is no separate "Global Market" filter — it's baked into the standard region clause.
+
+> If a pull is specifically for a regional event (e.g., EMEA only), the region is changed accordingly. But the default is always NA + Global.
+
+---
+
+### What "Active member" includes — subsidiaries too
+
+The membership filter is always:
+
+```
+Account Status starts with "Active"
+```
+
+This catches all three active status values:
+- **Active-Parent** — the primary member company account
+- **Active-Subsidiary** — a subsidiary of a member; also a member
+- **Active-Local Council** — active local council member
+
+Yes, subsidiaries are included. If a subsidiary is active, they are a member in good standing and their contacts are pulled.
+
+> **Note:** `Active-Subsidiary (irrelevant)` is also technically caught by the filter but is usually excluded intentionally — it marks subsidiaries that exist for hierarchy reasons only, not as real membership accounts.
+
+---
+
+### The mailable definition — who gets filtered out
+
+For any outreach-facing list, a contact must pass **all** of the following to be included:
+
+| Filter | What it removes |
+|---|---|
+| **Email is not blank** | Contacts with no email address on file |
+| **Email Opt Out = false** | Anyone who has unsubscribed |
+| **Is Email Bounced = false** | Hard bounces (the standard SF field, not Pardot's bounce field) |
+| **Is Board Member = false** | Global, NA, Media, CDO, APAC, EMEA, LATAM, and MFC board members |
+| **Current B2B CMO Council = false** | B2B CMO Council members (not covered by Is Board Member — must be explicit) |
+
+These five conditions are AND'd together — a contact is excluded if any one of them fails.
+
+> **Why Is Board Member alone isn't enough:** The `Is Board Member` field covers most boards but does NOT cover B2B CMO Council. Those members pass the board filter naturally, so the B2B CMO Council exclusion must always be added separately.
+
+> **MFC members:** The `Is Board Member` catch-all includes MFC. If a pull is intended to include MFC members (e.g., MFC-targeted outreach), you override it with a separate clause. For standard non-board audience pulls, MFC members are excluded along with other board types.
+
+---
+
+### How CMOs are identified — key role field, not title
+
+For **member accounts**, CMOs are identified using the **`Account.CMO__c` key role field** — a dedicated lookup field on the Account record that points to the specific Contact who holds that role. This is maintained by Shauna.
+
+**Do not use title string matching** (e.g., `Title LIKE '%CMO%'`) for member accounts. Title strings are unreliable — they vary in format, go stale when someone leaves, and can create duplicates. The key role field is the authoritative source.
+
+For **non-member accounts**, the key role may not be populated. In those cases, title-based filtering is the fallback.
+
+---
+
+### Standard report type — Contacts and Accounts
+
+For most large contact pulls, Aaron uses the **"Contacts and Accounts"** report type (not "Contacts" alone). This is because filtering on account-level fields (Status, Region, Ecosystem) requires the account relationship to be present in the report type.
+
+For event-specific pulls (who was invited, registered, attended), the report type is **"Campaign Members with Campaigns and Contacts"** — this lets you filter by campaign and see each person's status.
+
+---
+
+### Standard fields on every large report
+
+These columns are on every standard contact export:
+
+| Field | Why |
+|---|---|
+| First Name / Last Name | Required for Outreach import |
+| Email | Required for any send |
+| Title | For sequence personalization and filtering |
+| Account Name | Company name |
+| Primary Ecosystem | Marketer / Agency / Seller / Enabler etc. — used for segmentation |
+| Account Status | Confirms active membership at export time |
+| Title Level Dynamic | Formula-derived seniority (C-Level, VP, Director…) |
+| Is Board Member | Flag for board status — never send board-specific content to non-board audiences |
+| Current B2B CMO Council | Same reason — always visible on exports |
+| Salesforce ID (18-digit) | For re-import matching and deduplication |
+
+For event reports specifically, these are also standard:
+- **Campaign Member Status** (Invited / Registered / Attended)
+- **Seed List Tag** (flags contacts for specific outreach tiers, e.g., "2026 Tier 1 CMOs")
+- **MFC Board** and **NA / Global / Media Board** flags individually
+
+---
+
+### Key standing reports Aaron uses
+
+**Board membership — "Current boards - Jade"**
+
+For any question about who is on a board, Aaron uses the report **"Current boards - Jade"** (SF report ID: 00OVR000002sCfl2AE). This is the authoritative source for board status — more reliable than querying the boolean fields directly, because Jade keeps it current in real time. If you need to verify whether someone is a board member, run this report first.
+
+**Main CMO reports**
+
+- `Non-Board CMOs_20260511.xlsx` — the working CMO list, split into Non-Board member CMOs, Board CMOs, and Non-Member CMOs. Regenerated periodically via script.
+- `Invited_Main 2026 Events` (SF report ID: 00OVR000005KfvO2AS) — the standard event report template; all event campaign exports use these fields and this structure.
+
+**Mailable contact counts**
+
+Tracked monthly in the custom object `Emailable_Contacts_Snapshot__c`. Three records per snapshot: Total, Marketer-only, and Solution Provider. This is where the "how many mailable contacts do we have?" answer lives — not from running a fresh report each time.
+
+---
+
+### How this has changed — what's different from before
+
+A few things Shauna may be used to that have changed:
+
+1. **Large audience lists are now built via Python scripts, not manual SF reports.** For anything over a few hundred contacts — Outreach sequence audiences, event invite lists, CMO pulls — Aaron builds the list in Python using the SF API. The output is a clean Excel file ready to import into Outreach or Pardot. Manual SF report exports are still used for smaller, one-off pulls.
+
+2. **Subsidiaries are included** in all standard pulls (see above). This is intentional — Active-Subsidiary accounts are fully active members.
+
+3. **"Is Email Bounced"** (the standard SF field) is the bounce filter used — not the Pardot hard bounce field (`pi__pardot_hard_bounced__c`). These are slightly different and the SF native field is the one in the mailable definition.
+
+4. **Board exclusions require two fields**, not one. `Is Board Member = false` alone misses B2B CMO Council members. Both fields are always applied together.
+
+---
+
 ## ⚠️ Things to never do in Salesforce
 
 - **Never delete records** — deactivate or flag to Aaron/Angela instead
