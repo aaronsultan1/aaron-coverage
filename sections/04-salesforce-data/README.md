@@ -152,9 +152,9 @@ Campaigns in Salesforce track who was invited, registered, or attended an event 
 
 ---
 
-## How Aaron pulls large audience reports
+## How to build large audience reports
 
-This section explains the logic behind building large contact lists for event invitations, Outreach sequences, and member outreach — and answers questions like "what filters do you use?" and "do you include subsidiaries?"
+This section covers the filter logic for building contact lists for event invitations, Outreach sequences, and member outreach — and answers questions like "what filters do you use?" and "do you include subsidiaries?"
 
 ---
 
@@ -255,8 +255,9 @@ For any question about who is on a board, Aaron uses the report **"Current board
 
 **Main CMO reports**
 
-- `Non-Board CMOs_20260511.xlsx` — the working CMO list, split into Non-Board member CMOs, Board CMOs, and Non-Member CMOs. Regenerated periodically via script.
-- `Invited_Main 2026 Events` (SF report ID: 00OVR000005KfvO2AS) — the standard event report template; all event campaign exports use these fields and this structure.
+- **Member CMO [Marketers NON Board]** (SF report ID: 00OVR000005a6vF2AQ) — member CMOs excluding board members, identified by key role field.
+- **CMOs on Board - NAGLMD - 2026** (SF report ID: 00OVR000003AMDd2AO) — board member CMOs.
+- **Invited_Main 2026 Events** (SF report ID: 00OVR000005KfvO2AS) — the standard event report template; all event campaign exports use these fields and this structure.
 
 **Mailable contact counts**
 
@@ -264,17 +265,13 @@ Tracked monthly in the custom object `Emailable_Contacts_Snapshot__c`. Three rec
 
 ---
 
-### How this has changed — what's different from before
+### A few things to know when building these reports
 
-A few things Shauna may be used to that have changed:
+1. **Subsidiaries are included** in all standard pulls (see above). This is intentional — Active-Subsidiary accounts are fully active members, so don't filter them out.
 
-1. **Large audience lists are now built via Python scripts, not manual SF reports.** For anything over a few hundred contacts — Outreach sequence audiences, event invite lists, CMO pulls — Aaron builds the list in Python using the SF API. The output is a clean Excel file ready to import into Outreach or Pardot. Manual SF report exports are still used for smaller, one-off pulls.
+2. **Use "Is Email Bounced"** (the standard SF field) as the bounce filter — not `pi__pardot_hard_bounced__c` (Pardot's bounce field). These are different fields; the SF native one is correct.
 
-2. **Subsidiaries are included** in all standard pulls (see above). This is intentional — Active-Subsidiary accounts are fully active members.
-
-3. **"Is Email Bounced"** (the standard SF field) is the bounce filter used — not the Pardot hard bounce field (`pi__pardot_hard_bounced__c`). These are slightly different and the SF native field is the one in the mailable definition.
-
-4. **Board exclusions require two fields**, not one. `Is Board Member = false` alone misses B2B CMO Council members. Both fields are always applied together.
+3. **Board exclusions require two filters**, not one. `Is Board Member = false` alone misses B2B CMO Council members — they don't have that field set. Always add `Current B2B CMO Council Member = false` as a second condition.
 
 ---
 
