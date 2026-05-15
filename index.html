@@ -379,9 +379,63 @@
     .content h3:has(> span.warn) {
       color: #92400E;
     }
+
+    /* ── Mobile hamburger button ── */
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px 8px;
+      margin-right: 4px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      line-height: 1;
+      font-size: 20px;
+      color: #032D60;
+    }
+    .menu-btn:hover { background: #F3F4F6; }
+
+    /* ── Mobile overlay backdrop ── */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 99;
+    }
+    .sidebar-overlay.open { display: block; }
+
+    /* ── Mobile responsive ── */
+    @media (max-width: 768px) {
+      body { overflow: auto; }
+
+      .sidebar {
+        position: fixed;
+        top: 0; left: 0; bottom: 0;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        width: 280px;
+        min-width: 0;
+      }
+      .sidebar.open { transform: translateX(0); }
+
+      .main { width: 100%; min-width: 0; }
+
+      .menu-btn { display: flex; align-items: center; }
+
+      .topbar { padding: 0 16px; }
+
+      .content-wrap { padding: 20px 18px 48px; }
+
+      .content table { display: block; overflow-x: auto; }
+    }
   </style>
 </head>
 <body>
+
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <!-- ═══ SIDEBAR ═══ -->
 <div class="sidebar">
@@ -423,6 +477,7 @@
 <!-- ═══ MAIN ═══ -->
 <div class="main">
   <div class="topbar">
+    <button class="menu-btn" id="menu-btn" aria-label="Open navigation">☰</button>
     <span class="topbar-breadcrumb">Coverage Guide /</span>
     <h2 id="page-title">Home &amp; Contacts</h2>
   </div>
@@ -638,6 +693,26 @@
       document.getElementById('search-results').classList.remove('open');
     }
   });
+
+  // ── Mobile sidebar toggle ──────────────────────────────────────────────────
+  const menuBtn     = document.getElementById('menu-btn');
+  const sidebarEl   = document.querySelector('.sidebar');
+  const overlayEl   = document.getElementById('sidebar-overlay');
+
+  function openSidebar()  { sidebarEl.classList.add('open');  overlayEl.classList.add('open');  }
+  function closeSidebar() { sidebarEl.classList.remove('open'); overlayEl.classList.remove('open'); }
+
+  menuBtn.addEventListener('click', () => {
+    sidebarEl.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+  overlayEl.addEventListener('click', closeSidebar);
+
+  // Close sidebar after nav on mobile
+  const origNav = nav;
+  nav = function(el, anchor) {
+    origNav(el, anchor);
+    if (window.innerWidth <= 768) closeSidebar();
+  };
 
   // Initial load
   loadContent('README.md');
