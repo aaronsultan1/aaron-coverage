@@ -150,6 +150,116 @@ Campaigns in Salesforce track who was invited, registered, or attended an event 
 
 ---
 
+### 🟡 MEDIUM: Bulk import or update contacts (Data Import Wizard)
+
+Use this when you have a CSV of contacts you want to add to Salesforce or update in bulk — for example, updating titles, or adding a batch of new contacts from an event.
+
+![Import button on Contacts list](../../assets/screenshots/salesforce/10-import-button.png)
+
+**Step 1 — Open the wizard**
+
+1. Go to **Contacts** in the top nav → you'll see the Contacts list view
+2. Click **Import** in the top-right button row
+3. A modal appears with two options — select **"Import, Update, or Export"** (the Data Import Wizard)
+   - Do NOT choose "Import from File" — that's a simpler tool with fewer options
+4. Click **Next** — the wizard opens in a new tab
+
+![Import modal - choose Data Import Wizard](../../assets/screenshots/salesforce/11-import-modal.png)
+
+**Step 2 — Choose data type and action**
+
+The wizard has three columns: what kind of data, what to do, and where your file is.
+
+![Wizard with Accounts & Contacts selected](../../assets/screenshots/salesforce/13-wizard-contacts-update.png)
+
+1. Under **"What kind of data are you importing?"** → click **Accounts and Contacts**
+2. Under **"What do you want to do?"** → choose the right action:
+   - **Add new records** — only creates contacts that don't exist yet
+   - **Update existing records** — updates contacts already in SF (no new records created)
+   - **Add new and update existing records** — does both (use this if you're not sure)
+3. For **Update existing records**, set **Match Contact by** to **"Salesforce.com ID"** — this is the most reliable matching method. Your CSV must include the 18-digit SF Contact ID column.
+4. Under **"Where is your data located?"** → click **CSV** and upload your file
+
+> **Tip:** Always match by Salesforce ID when updating existing contacts. Matching by name or email can cause mismatches or duplicates.
+
+**Step 3 — Edit mapping**
+
+![Edit mapping screen](../../assets/screenshots/salesforce/14-wizard-mapping.png)
+
+Salesforce will try to auto-map your CSV columns to SF fields. Many will show **Unmapped** in red — that's fine for fields you don't need. For contact updates:
+
+- Click **Map** next to any unmapped column you do want to update (e.g., Title, Email)
+- Leave columns you don't need as Unmapped — Salesforce will skip those fields
+- The **Contact Salesforce Id** column must be mapped to `Contact ID` (the matching key)
+
+> **Protected contacts:** Before updating any contact records, check if they're board members, B2B CMO Council, or MFC. Never overwrite fields on protected contacts — see the [protected contact rules](#-easy-check-if-a-contact-is-a-board-member) above.
+
+**Step 4 — Start Import**
+
+1. Review the summary (total records, action, file name)
+2. Click **Start Import**
+3. Salesforce processes in the background — you'll get an email when it finishes
+4. Check the Results page for any errors (e.g., records that couldn't be matched)
+
+![Start Import step](../../assets/screenshots/salesforce/15-wizard-start-import.png)
+
+---
+
+### 🟡 MEDIUM: Add contacts to a campaign in bulk (Campaign Member import)
+
+Use this when you have a list of people (with their SF Contact IDs) and a campaign ID, and you want to add them all as campaign members — or update their status (e.g., Invited → Attended) in bulk. This is faster and more reliable than the Campaign → Manage Members UI for large lists.
+
+**What your CSV needs:**
+
+| Column | What it should contain |
+|---|---|
+| `CampaignId` | The 18-digit Salesforce Campaign ID (same value for every row) |
+| `ContactId` | The 18-digit Salesforce Contact ID for each person |
+| `Status` | The campaign member status: `Invited`, `Registered`, `Attended`, etc. |
+
+> To find a Campaign ID: open the campaign record in Salesforce — the ID is in the URL after `/r/Campaign/`. It starts with `701`.
+
+**Step 1 — Open the wizard**
+
+Same as above: **Contacts → Import → Import, Update, or Export → Next**
+
+**Step 2 — Select Campaign Members**
+
+![Campaign Members selected in wizard](../../assets/screenshots/salesforce/12-wizard-campaign-members.png)
+
+1. Under **"What kind of data are you importing?"** → click **Campaign Members**
+2. Under **"What do you want to do?"** → select **"Add new and update existing records"**
+   - This is the safe choice: it adds people not yet in the campaign AND updates anyone already in it
+   - **Matched by: Salesforce Id** will be shown — that's correct, leave it
+3. Upload your CSV file on the right
+
+**Step 3 — Edit mapping**
+
+SF will auto-detect most columns if your headers match exactly. Check that:
+
+- **CampaignId** is mapped to `Campaign ID`
+- **ContactId** is mapped to `Contact ID`
+- **Status** is mapped to `Status` (usually auto-mapped, shown as "Change" not "Map")
+- Leave everything else as Unmapped
+
+> If your CSV has extra columns (Full Name, Email, Title, etc.), that's fine — Salesforce will ignore Unmapped columns. These extra columns are useful for your own reference.
+
+**Step 4 — Start Import**
+
+Review the summary and click **Start Import**. Check the results email for any errors — common issues are invalid Campaign IDs or Contact IDs that don't exist in SF.
+
+---
+
+### 💡 CSV format tips for both import types
+
+- **Always export your list with the 18-digit Salesforce ID** before doing any bulk update — it's the safest matching key. Run a Contacts report and include the "Contact ID" field.
+- Salesforce imports up to **50,000 records at a time**
+- Use **comma-separated** values (the default CSV format)
+- Column headers must be plain text — no special characters or merged cells
+- If you're reusing a CSV template from a past import, double-check that the column names still match what SF expects
+
+---
+
 ---
 
 ## How to build large audience reports
