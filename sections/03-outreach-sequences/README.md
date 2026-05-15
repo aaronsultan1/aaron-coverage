@@ -71,7 +71,7 @@ This is the end-to-end process for building a new audience and getting emails ou
 3. Click into the sequence → click **Add Prospects** (top right)
 4. Search for the people by name, or use the import batch filter (see Fake Import trick below)
 5. Select everyone → click **Add to Sequence**
-6. **Check with Amanda or Angela before activating** — they'll confirm the timing and list
+6. **Check with Amanda before activating** — she'll confirm the timing and list
 
 ---
 
@@ -162,7 +162,7 @@ The **"For batch is XXXXX"** filter chip appears automatically. You can see the 
 2. Click **Pause** (top right)
 3. Confirm — all scheduled emails stop immediately
 
-> **When to do this:** There's a typo in an email, a board member got enrolled by mistake, or Amanda/Angela asks you to stop.
+> **When to do this:** There's a typo in an email, a board member got enrolled by mistake, or Amanda asks you to stop.
 
 ---
 
@@ -175,7 +175,7 @@ The **"For batch is XXXXX"** filter chip appears automatically. You can see the 
 3. Search for the sequence by name
 4. Select it (radio button turns purple) → click **Add to Sequence**
 
-> Always confirm with Amanda or Angela which sequence to use before adding someone.
+> Always confirm with Amanda which sequence to use before adding someone.
 
 If the person doesn't exist in Outreach yet:
 - Go to **Prospects** → **+ New Prospect** (top right)
@@ -195,6 +195,6 @@ If the person doesn't exist in Outreach yet:
 
 ## ⚠️ Things to never do in Outreach
 
-- **Don't resume a paused sequence** without checking with Amanda or Angela first
-- **Don't add board member contacts to sequences** — they're managed separately by Jade/Angela
+- **Don't resume a paused sequence** without checking with Amanda first
+- **Don't add board member contacts to sequences** — they're managed separately by Jade
 - **Don't delete sequence steps** — it breaks the sequence permanently for everyone in it

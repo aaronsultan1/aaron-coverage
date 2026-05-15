@@ -64,7 +64,7 @@ Aaron pulls data from multiple analytics platforms to answer questions about cam
 
 ### 🟡 MEDIUM: Pull the POSSIBLE registration report for leadership
 
-Amanda or Angela may ask for a summary of registration by member company.
+Amanda may ask for a summary of registration by member company.
 
 1. Export the POSSIBLE 2026_registration Campaign Members from SF (see Easy task above)
 2. Open in Excel
@@ -92,4 +92,4 @@ Aaron runs `update_kargo_report.py` to process Kargo's media delivery data and p
 
 ### 🔴 HARD: Engagement report (PDF/Word doc)
 
-Aaron builds periodic engagement reports using Python. For coverage, ask Angela or Dan what they need — a simple SF report export may be sufficient.
+Aaron builds periodic engagement reports using Python. For coverage, ask Dan what they need — a simple SF report export may be sufficient.

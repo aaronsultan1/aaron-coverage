@@ -166,7 +166,7 @@ After an email goes out, you may get asked how many people were on the list or w
 
 A **Form Handler** is what captures registrations and submissions from Pardot forms embedded in emails or landing pages. When someone fills out the form, the handler fires its **Completion Actions** — adding them to the Salesforce campaign and a Pardot list automatically.
 
-> **Prerequisite:** The Salesforce campaign must already exist before you start. If it hasn't been created yet, stop and create it first (or ask Angela/Jason to create it — campaign creation requires admin access).
+> **Prerequisite:** The Salesforce campaign must already exist before you start. If it hasn't been created yet, stop — campaign creation requires Salesforce admin access. Flag it to Aaron and hold until he can create it, or ask Jason Chase (he has admin access).
 
 ---
 

@@ -142,7 +142,7 @@ The most powerful use of Apollo is filtering by your own SF data. Here's how to 
 
 Aaron has set up a warm-up domain (`mmaglobal.net`) for Apollo campaigns. Running campaigns requires:
 - Properly warmed-up mailboxes (takes ~30 days)
-- Sequence setup with copy approval from Amanda/Angela
+- Sequence setup with copy approval from Amanda
 - Understanding of Apollo's deliverability settings
 
 Do not start new Apollo campaigns without Aaron. The mailboxes are in the process of warming up as of April 2026.

@@ -42,7 +42,7 @@ Salesforce is MMA's CRM. This section covers the most common lookups and data pu
    - `Current B2B CMO Council Member` = checked
    - `Current MM25 Board Member` = checked
    - `Committee Member` = checked
-3. If any of these are set → **do not edit the contact record.** Flag to Jade or Angela.
+3. If any of these are set → **do not edit the contact record.** Flag to Jade.
 
 ---
 
@@ -387,7 +387,7 @@ Tracked monthly in the custom object `Emailable_Contacts_Snapshot__c`. Three rec
 
 ## ⚠️ Things to never do in Salesforce
 
-- **Never delete records** — deactivate or flag to Aaron/Angela instead
+- **Never delete records** — deactivate or flag to Aaron instead
 - **Never merge board member records** — only Jade does this
 - **Never remove the Account from a Contact** — every contact must have an account
 - **Never modify Account Status** — that's Shauna's job

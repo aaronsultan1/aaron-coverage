@@ -17,8 +17,8 @@ Aaron is the admin for Salesforce, Pardot, and Outreach. When someone needs acce
    - First Name, Last Name
    - Email (this becomes their username)
    - Username (usually email address)
-   - Role — ask Angela/Shauna what role to assign
-   - Profile — ask Angela what profile (usually "Standard User" or a custom MMA profile)
+   - Role — use **Membership - Standard** for most MMA staff
+   - Profile — use **Membership - Standard** for most users (covers all standard CRM and Pardot access)
 5. Click **Save**
 6. SF will send them an activation email
 
@@ -54,10 +54,10 @@ Outreach is a separate platform with separate billing.
 2. Click your profile icon → **Settings** → **Users**
 3. Click **Invite User**
 4. Enter their email
-5. Assign a role (Sales Rep, Admin, etc.) — ask Angela what level
+5. Assign a role — use **Standard** for most users
 6. Send invite
 
-> **Note:** Outreach seats cost money. Check with Angela before adding new users.
+> **Note:** Outreach seats cost money. Do not add new users without checking with Aaron first — flag it and wait for his return.
 
 ---
 
@@ -85,6 +85,6 @@ This requires deep Pardot knowledge. Do not attempt to create or modify automati
 |---|---|
 | User not getting SF activation email | Check spam; use Reset Password in SF Setup |
 | User logged into SF but can't access Pardot | They may need to be added in Pardot User Management separately |
-| User can log into Pardot but sees nothing | Their Pardot role may be too restricted — ask Angela what level they need |
+| User can log into Pardot but sees nothing | Their Pardot role may be too restricted — check their role in Pardot User Management and update to **Marketing** if needed |
 | Outreach: user can't find their sequence | Check they're assigned to the correct team in Outreach settings |
 | Stova: user never got setup email | Resend password reset manually from Stova admin panel |

@@ -102,7 +102,7 @@ Aaron's process:
 4. Creates new SF contacts for people not in SF
 
 **For coverage:** If a new wave of registrants comes in and Aaron is unreachable, do this:
-1. Open the Excel registration file (ask Leah or Angela for the current version)
+1. Open the Excel registration file (ask Leah for the current version)
 2. Identify which people marked "Y" in the Member column are **not yet** in the SF campaign
 3. For people already in SF: manually add them to the campaign (see below)
 4. For people **not** in SF: flag them in a list and hold — do not create contacts without verifying the company is an active SF account
