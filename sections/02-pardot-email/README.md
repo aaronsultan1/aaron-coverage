@@ -162,3 +162,94 @@ After an email goes out, you may get asked how many people were on the list or w
 
 ---
 
+### 🟡 MEDIUM: Create a Form Handler (linked to a Salesforce Campaign)
+
+A **Form Handler** is what captures registrations and submissions from Pardot forms embedded in emails or landing pages. When someone fills out the form, the handler fires its **Completion Actions** — adding them to the Salesforce campaign and a Pardot list automatically.
+
+> **Prerequisite:** The Salesforce campaign must already exist before you start. If it hasn't been created yet, stop and create it first (or ask Angela/Jason to create it — campaign creation requires admin access).
+
+---
+
+**Step 1 — Create a matching Pardot list**
+
+Before touching Form Handlers, you need a Pardot list with the exact same name as the Salesforce campaign. This is what the form handler will add people to on the Pardot side.
+
+![Marketing → Segmentation → Lists navigation](../../assets/screenshots/pardot/fh-step1.png)
+
+1. In Pardot, click **Marketing** in the left nav
+2. Go to **Segmentation → Lists**
+3. Click **+ Add List**
+4. In the **Name** field, type the exact name of the Salesforce campaign — character for character
+5. Leave **Dynamic List** unchecked (this is a static list)
+6. Click **Create List**
+
+> ⚠️ **Naming matters:** The Pardot list and Salesforce campaign should have identical names. This is the convention Aaron uses to keep both systems aligned — it makes it easy to tell at a glance which list belongs to which campaign.
+
+---
+
+**Step 2 — Find the template form handler**
+
+Rather than building a form handler from scratch, you always start from a pre-built template that already has all the required fields.
+
+![Form Handlers list — search for template and click Copy](../../assets/screenshots/pardot/fh-step2.png)
+
+1. In Pardot, go to **Marketing → Forms → Form Handlers**
+2. In the **Filter** bar at the top left, type `template`
+3. You'll see **TEMPLATE - Webinar (Registration)** appear
+4. Click the **gear icon** (⚙) on the right → choose **Copy**
+
+> 📝 Despite the "Webinar Registration" name, this template is used for all form handler types — events, webinars, email campaigns, everything. Don't let the name throw you off.
+
+---
+
+**Step 3 — Configure the copy**
+
+![Copy form handler dialog — Name, Folder, Campaign](../../assets/screenshots/pardot/fh-step3.png)
+
+A dialog appears with three fields:
+
+1. **Name** — give it the same name as the Salesforce campaign (keeping it consistent)
+2. **Folder** — choose the appropriate year/program folder (e.g., `/2026/NAM/Forms`)
+3. **Campaign** — click **Choose** and select the Salesforce campaign this handler is for
+4. Click **Copy form handler**
+
+The form handler is created and you'll land on its detail page.
+
+---
+
+**Step 4 — Add completion actions**
+
+This is the key step. Completion actions are what fire automatically when someone submits the form.
+
+![Completion Actions — all three actions configured](../../assets/screenshots/pardot/fh-step4.png)
+
+1. On the form handler page, click **Edit Form Handler** at the top
+2. Click the **Completion Actions** tab
+3. You'll see one action already set: **Assign to user → System Admin** — leave this exactly as is
+4. Click **+ Add Action** to add the first new action:
+   - Action: **Add to campaign**
+   - Campaign: select your Salesforce campaign
+   - Campaign Member Status: choose the appropriate status —
+     - **Registered** — for event/webinar registrations
+     - **Responded** — for general form submissions or email responses
+     - **Sent** — for contacts who were sent something
+     > 📝 If you need a custom status like "Attended," it must be created on the Salesforce campaign first — only statuses that exist on the SF campaign will appear in this dropdown.
+5. Click **+ Add Action** again to add the second action:
+   - Action: **Add to list**
+   - List: select the Pardot list you created in Step 1 (same name as the campaign)
+6. Click **Save** at the bottom
+
+---
+
+**Summary — the 3 completion actions every form handler should have:**
+
+| # | Action | Setting |
+|---|---|---|
+| 1 | Assign to user | System Admin *(pre-set — don't touch)* |
+| 2 | Add to campaign | Your Salesforce campaign + member status |
+| 3 | Add to list | Your matching Pardot list |
+
+> **Note on form fields:** The template already contains all the required contact fields (First Name, Last Name, Email, Company, etc.). Do not modify or remove any of the existing fields — they're standardized across all MMA form handlers.
+
+---
+
